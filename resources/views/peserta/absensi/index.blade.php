@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Absensi')
+@section('title', 'Presensi')
 @section('page-header')
-    Absensi
+    Presensi
 @endsection
 @section('main')
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Absensi Tanggal {{ today()->format('d M Y') }}
+                    Presensi Tanggal {{ today()->format('d M Y') }}
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -16,7 +16,7 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Keterangan Absen</th>
+                                    <th>Keterangan Presensi</th>
                                     <th>-</th>
                                 </tr>
                                 </thead>
@@ -26,7 +26,7 @@
                                     <td>
                                         <button class="btn btn-primary"
                                                 id="absenMasuk" {{ $absensi != null && $absensi['jam_masuk'] != null ? 'disabled' : '' }}>
-                                            Absen Masuk
+                                            Presensi Masuk
                                         </button>
                                     </td>
                                 </tr>
@@ -35,7 +35,7 @@
                                     <td>
                                         <button class="btn btn-warning"
                                                 id="absenPulang" {{ $absensi != null && $absensi['jam_pulang'] != null ? 'disabled' : '' }}>
-                                            Absen Pulang
+                                            Presensi Pulang
                                         </button>
                                     </td>
                                 </tr>
@@ -59,7 +59,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Riwayat Absensi
+                    Riwayat Presensi
                 </div>
                 <div class="panel-body">
                     <table class="table">
