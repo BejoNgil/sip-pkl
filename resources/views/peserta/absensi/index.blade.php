@@ -26,7 +26,7 @@
                                     <td>
                                         <button class="btn btn-primary"
                                                 id="absenMasuk" {{ $absensi != null && $absensi['jam_masuk'] != null ? 'disabled' : '' }}>
-                                            Presensi Masuk
+                                            Masuk
                                         </button>
                                     </td>
                                 </tr>
@@ -35,7 +35,7 @@
                                     <td>
                                         <button class="btn btn-warning"
                                                 id="absenPulang" {{ $absensi != null && $absensi['jam_pulang'] != null ? 'disabled' : '' }}>
-                                            Presensi Pulang
+                                            Pulang
                                         </button>
                                     </td>
                                 </tr>
