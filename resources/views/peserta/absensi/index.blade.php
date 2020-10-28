@@ -97,7 +97,7 @@
         $('#absenMasuk').click(function () {
             swal({
                 title: "Apa anda yakin?",
-                text: "Akan Menyimpan Absensi masuk?",
+                text: "Akan Menyimpan Presensi masuk?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -110,7 +110,7 @@
         $('#absenPulang').click(function () {
             swal({
                 title: "Apa anda yakin?",
-                text: "Akan Menyimpan Absensi pulang?",
+                text: "Akan Menyimpan Presensi pulang?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
