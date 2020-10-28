@@ -40,7 +40,7 @@
                     <a href="{{ route('bimbingan.index') }}"><i class="fa fa-list-alt"></i> Bimbingan</a>
                 </li>
                 <li>
-                    <a href="{{ route('absensi.index') }}"><i class="fa fa-list-alt"></i> Absensi</a>
+                    <a href="{{ route('absensi.index') }}"><i class="fa fa-list-alt"></i> Presensi</a>
                 </li>
                 <li>
                     <a href="{{ route('permasalahan-kerja.index') }}"><i class="fa fa-archive"></i> Permasalahan Kerja</a>
