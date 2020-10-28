@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Peserta;
 use App\Absensi;
 use App\Http\Controllers\Controller;
 use App\Peserta;
+use App\PKL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -16,8 +17,16 @@ class AbsensiController extends Controller
             ->where('tanggal', today())->first();
 
         $historyAbsensi = Absensi::where('peserta_id', auth()->user()->authenticable_id)->paginate(10);
+        $pkl = PKL::where('peserta_id', auth()->user()->authenticable_id)->first();
+        $date_now = date('Y-m-d');
+        if($date_now <= $pkl->tanggal_selesai)
+        {
+            $presensi = 1;
+        }else {
+            $presensi = 0;
+        }
 
-        return view('peserta.absensi.index', compact('absensi', 'historyAbsensi'));
+        return view('peserta.absensi.index', compact('absensi', 'historyAbsensi', 'presensi'));
     }
 
     public function store(Request $request)

@@ -24,19 +24,31 @@
                                 <tr>
                                     <td>{{ $absensi != null ? 'Pukul ' . $absensi['jam_masuk'] . ' WIB' : '(Belum Presensi)' }}</td>
                                     <td>
+                                        @if ($presensi == 1)
                                         <button class="btn btn-primary"
                                                 id="absenMasuk" {{ $absensi != null && $absensi['jam_masuk'] != null ? 'disabled' : '' }}>
                                             Masuk
                                         </button>
+                                        @else
+                                        <button class="btn btn-primary" disabled>
+                                            Masuk
+                                        </button>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>{{ $absensi != null && $absensi['jam_pulang'] != null ? 'Pukul ' . $absensi['jam_pulang'] . ' WIB' : '(Belum Presensi)' }}</td>
                                     <td>
+                                        @if ($presensi == 1)
                                         <button class="btn btn-warning"
                                                 id="absenPulang" {{ $absensi != null && $absensi['jam_pulang'] != null ? 'disabled' : '' }}>
                                             Pulang
                                         </button>
+                                        @else
+                                        <button class="btn btn-warning" disabled>
+                                            Pulang
+                                        </button>
+                                        @endif
                                     </td>
                                 </tr>
                                 </tbody>
