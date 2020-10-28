@@ -22,7 +22,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>{{ $absensi != null ? 'Pukul ' . $absensi['jam_masuk'] . ' WIB' : '(Belum Absensi)' }}</td>
+                                    <td>{{ $absensi != null ? 'Pukul ' . $absensi['jam_masuk'] . ' WIB' : '(Belum Presensi)' }}</td>
                                     <td>
                                         <button class="btn btn-primary"
                                                 id="absenMasuk" {{ $absensi != null && $absensi['jam_masuk'] != null ? 'disabled' : '' }}>
@@ -31,7 +31,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>{{ $absensi != null && $absensi['jam_pulang'] != null ? 'Pukul ' . $absensi['jam_pulang'] . ' WIB' : '(Belum Absensi)' }}</td>
+                                    <td>{{ $absensi != null && $absensi['jam_pulang'] != null ? 'Pukul ' . $absensi['jam_pulang'] . ' WIB' : '(Belum Presensi)' }}</td>
                                     <td>
                                         <button class="btn btn-warning"
                                                 id="absenPulang" {{ $absensi != null && $absensi['jam_pulang'] != null ? 'disabled' : '' }}>
