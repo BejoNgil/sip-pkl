@@ -7,6 +7,7 @@ use App\PKL;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 
 class ManagePKLController extends Controller
 {
@@ -29,16 +30,21 @@ class ManagePKLController extends Controller
     {
         Session::flash('showCreateModal', true);
 
-        $validated = $request->validate([
+        $request->validate([
             'peserta_id' => 'required|exists:peserta,id',
             'pembimbing_id' => 'required|exists:pembimbing,id',
             'posisi_id' => 'required|exists:posisi,id',
             'tanggal_mulai' => 'required|date',
         ]);
-
+        $dt = Carbon::create($request->tanggal_mulai);
         Session::forget('showCreateModal');
-
-        PKL::create($validated);
+        $pkl = new PKL();
+        $pkl->peserta_id = $request->peserta_id;
+        $pkl->pembimbing_id = $request->pembimbing_id;
+        $pkl->posisi_id = $request->posisi_id;
+        $pkl->tanggal_mulai = $request->tanggal_mulai;
+        $pkl->tanggal_selesai = date('Y-m-d', strtotime($dt->addDays(30)));
+        $pkl->save();
 
         Session::flash('success', 'Berhasil Menugaskan Peserta');
 
