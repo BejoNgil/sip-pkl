@@ -15,6 +15,9 @@ class PrintSuratController extends Controller
     {
         abort_unless($pkl->tanggal_selesai != null, 403);
 
+        $qrcode = QrCode::size(100)
+            ->format('svg')
+            ->generate('Eko Sulistyono', storage_path('app/public/qrcodes/'.'qrcode'.'.svg'));
         $pkl->load('peserta.sekolah');
 
         $data['nama'] = $pkl->peserta->nama;
@@ -23,8 +26,9 @@ class PrintSuratController extends Controller
         $data['tglMulai'] = Carbon::parse($pkl->tanggal_mulai)->format('d F Y');
         $data['tglSelesai'] = Carbon::parse($pkl->tanggal_selesai)->format('d F Y');
         $data['tanggal'] = $data['tglSelesai'];
+        $data['qrcode'] = $qrcode;
         $pdf = PDF::loadView('peserta.print-surat', ['data' => $data])->setPaper('A4');
-
+        //return $pdf->stream();
         return $pdf->download('surat-keterangan-selesai-pkl.pdf');
     }
 }

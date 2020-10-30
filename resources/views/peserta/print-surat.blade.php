@@ -115,7 +115,8 @@
     <div style="text-align: right">
         <div>
             <p>Purbalingga, {{ $data['tanggal'] }}</p>
-            <img src="{{ QrCode::format('png')->generate('Embed me into an e-mail!') }}" alt="">
+            <br>
+            <img src="{{ storage_path('app/public/qrcodes/'.'qrcode'.'.svg') }}" alt="">
             <br>
             <p>Eko Sulistyono</p>
         </div>
