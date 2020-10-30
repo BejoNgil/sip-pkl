@@ -85,24 +85,24 @@
                 <tr>
                     <td width="12.5%">Nama</td>
                     <td width="1.5%">:</td>
-                    <td>{{ $nama }}</td>
+                    <td>{{ $data['nama'] }}</td>
                 </tr>
                 <tr>
                     <td>NIS</td>
                     <td>:</td>
-                    <td>{{ $nis }}</td>
+                    <td>{{ $data['nis'] }}</td>
                 </tr>
                 <tr>
                     <td>Sekolah</td>
                     <td>:</td>
-                    <td>{{ $sekolah }}</td>
+                    <td>{{ $data['sekolah'] }}</td>
                 </tr>
             </table>
             <br>
             <p class="text-justify">Telah menyelesaikan Kegiatan Praktek Kerja Lapangan (PKL) pada Kampung Marketer, Jl.
                 Raya Tamansari,
                 Kompleks Karangwuni, Desa Tamansari, Karangmoncol, Kab. Purbalingga, Jawa Tengah 53355. Dari
-                tanggal {{ $tglMulai }} sampai dengan {{ $tglSelesai }}. Selama melaksanakan tugasnya di kampung
+                tanggal {{ $data['tglMulai'] }} sampai dengan {{ $data['tglSelesai'] }}. Selama melaksanakan tugasnya di kampung
                 marketer ini, siswa
                 yang bersangkutan telah menjalankan tugasnya dengan baik.
             </p>
@@ -114,9 +114,8 @@
     <br><br>
     <div style="text-align: right">
         <div>
-            <p>Purbalingga, {{ $tanggal }}</p>
-            <br>
-            <br>
+            <p>Purbalingga, {{ $data['tanggal'] }}</p>
+            <img src="{{ QrCode::format('png')->generate('Embed me into an e-mail!') }}" alt="">
             <br>
             <p>Eko Sulistyono</p>
         </div>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\PKL;
 use Carbon\Carbon;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class PrintSuratController extends Controller
 {
@@ -21,8 +23,7 @@ class PrintSuratController extends Controller
         $data['tglMulai'] = Carbon::parse($pkl->tanggal_mulai)->format('d F Y');
         $data['tglSelesai'] = Carbon::parse($pkl->tanggal_selesai)->format('d F Y');
         $data['tanggal'] = $data['tglSelesai'];
-
-        $pdf = PDF::loadView('peserta.print-surat', $data)->setPaper('A4');
+        $pdf = PDF::loadView('peserta.print-surat', ['data' => $data])->setPaper('A4');
 
         return $pdf->download('surat-keterangan-selesai-pkl.pdf');
     }
