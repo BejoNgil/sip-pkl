@@ -41,7 +41,7 @@ class PrintSuratController extends Controller
         $data['tanggal'] = $data['tglSelesai'];
         $data['qrcode'] = $qrcode;
         $pdf = PDF::loadView('peserta.print-surat', ['data' => $data])->setPaper('A4');
-        return $pdf->stream();
-        //return $pdf->download('surat-keterangan-selesai-pkl.pdf');
+        //return $pdf->stream();
+        return $pdf->download('surat-keterangan-selesai-pkl.pdf');
     }
 }
