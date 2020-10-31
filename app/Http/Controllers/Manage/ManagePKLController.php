@@ -13,7 +13,7 @@ class ManagePKLController extends Controller
 {
     public function index()
     {
-        $listPKL = PKL::with(['peserta', 'posisi', 'pembimbing'])->newQuery();
+        $listPKL = PKL::with(['peserta', 'posisi', 'pembimbing', 'nilai'])->newQuery();
 
         $user = auth()->user();
 

@@ -26,9 +26,15 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#pesertaInfo"
-                                           data-id="{{ $item->peserta->id }}">{{ $item->peserta->nama }}
+                                        @if ($item->nilai->count() > 0)
+                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#pesertaInfo"
+                                            data-id="{{ $item->peserta->id }}">{{ $item->peserta->nama }}
                                             ({{ $item->peserta->sekolah->nama }})</a>
+                                        @else
+                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#pesertaInfo"
+                                            data-id="{{ $item->peserta->id }}" style="color: red !important;">{{ $item->peserta->nama }}
+                                            ({{ $item->peserta->sekolah->nama }})</a>
+                                        @endif
                                     </td>
                                     <td>
                                         {{ $item['posisi']['nama'] }}
@@ -124,7 +130,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>

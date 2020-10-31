@@ -27,6 +27,7 @@
                                 <th>Nama Pembimbing</th>
                                 <th>Tgl Mulai</th>
                                 <th>Tgl Selesai</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -41,6 +42,13 @@
                                     <td>{{ $item->pembimbing->nama}}</td>
                                     <td>{{ $item->tanggal_mulai->format('d M Y') }}</td>
                                     <td>{{ $item->tanggal_selesai != null ? $item->tanggal_selesai->format('d M Y') : '-' }}</td>
+                                    <td>
+                                        @if ($item->nilai->count() > 0)
+                                            {!! '<span class="text-danger">Non Aktif</span>' !!}
+                                        @else
+                                            {!! '<span class="text-success">Aktif</span>' !!}
+                                        @endif
+                                    </td>
                                     <td width="20%">
                                         <a href="#" class="btn btn-info"><i
                                                 class="fa fa-eye"></i> Lihat Detail</a>
