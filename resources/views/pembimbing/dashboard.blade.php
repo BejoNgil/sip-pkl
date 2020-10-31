@@ -5,7 +5,7 @@
                 <div class="number">
                     <h3>
                     </h3><h3>{{ $stats['peserta_count'] }}</h3>
-                    <small>Total Peserta Yang Dibimbing</small>
+                    <small>Total Peserta</small>
                 </div>
                 <div class="icon">
                     <i class="fa fa-users fa-5x red"></i>
@@ -31,7 +31,6 @@
             </div>
         </div>
     </div>
-
     <div class="col-md-3 col-sm-12 col-xs-12">
         <div class="board">
             <div class="panel panel-primary">
@@ -48,22 +47,17 @@
             </div>
         </div>
     </div>
-
-{{--    <div class="col-md-3 col-sm-12 col-xs-12">--}}
-{{--        <div class="board">--}}
-{{--            <div class="panel panel-primary">--}}
-{{--                <div class="number">--}}
-{{--                    <h3>--}}
-{{--                    </h3><h3>89,645</h3>--}}
-{{--                    <small>Daily Profits</small>--}}
-
-{{--                </div>--}}
-{{--                <div class="icon">--}}
-{{--                    <i class="fa fa-user fa-5x yellow"></i>--}}
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
+    <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="board">
+            <div class="panel panel-primary">
+                <div class="number">
+                    <h3>{{ $stats['none_active_count'] }}</h3>
+                    <small>Peserta Non Aktif</small>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users fa-5x yellow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

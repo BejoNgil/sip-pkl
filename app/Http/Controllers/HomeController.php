@@ -36,6 +36,8 @@ class HomeController extends Controller
             $stats['peserta_count'] = PKL::where('pembimbing_id', $user->authenticable_id)->count();
             $stats['peserta_active_count'] = PKL::where('pembimbing_id', $user->authenticable_id)
                 ->doesntHave('nilai')->count();
+            $stats['none_active_count'] = PKL::where('pembimbing_id', $user->authenticable_id)
+                ->whereHas('nilai')->count();
             $stats['masalah_count'] = PermasalahanKerja::whereHas('pkl', function (Builder $query) use ($user) {
                 return $query->where('pembimbing_id', $user->authenticable_id);
             })->count();
