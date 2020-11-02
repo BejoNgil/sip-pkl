@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
-    Route::group(['namespace' => 'Manage', 'prefix' => 'manage'], function () {
+    Route::group(['namespace' => 'Manage', 'prefix' => 'manage', 'middleware' => ['can:admin', 'can:pembimbing']], function () {
         Route::get('pkl', 'ManagePKLController@index')->name('pkl.index');
         Route::post('pkl', 'ManagePKLController@store')->name('pkl.store');
     });
