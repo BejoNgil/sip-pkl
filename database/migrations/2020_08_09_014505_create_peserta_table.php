@@ -24,9 +24,7 @@ class CreatePesertaTable extends Migration
             $table->string('foto')->nullable();
             $table->string('ayah')->nullable();
             $table->string('ibu')->nullable();
-            $table->foreignId('program_keahlian_id')->nullable()
-                ->constrained('program_keahlian')
-                ->nullOnDelete();
+            $table->foreignId('program_keahlian_id')->constrained('program_keahlian');
             $table->foreignId('sekolah_id')->nullable()
                 ->constrained('sekolah')
                 ->nullOnDelete();
@@ -41,6 +39,7 @@ class CreatePesertaTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('peserta');
     }
 }

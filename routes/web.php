@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['namespace' => 'Manage', 'prefix' => 'manage', 'middleware' => ['can:admin' || 'can:pembimbing']], function () {
-        Route::resource('pkl', 'ManagePKLController');
+        Route::resource('pkl', ManagePKLController::class);
     });
 
     Route::group(['namespace' => 'Resource', 'prefix' => 'resource', 'middleware' => ['can:admin' || 'can:pembimbing']], function () {

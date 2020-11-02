@@ -31,6 +31,7 @@ class CreateLogKegiatanTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('log_kegiatan');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermasalahanKerjaTable extends Migration
+class CreateDetailPermasalahan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePermasalahanKerjaTable extends Migration
      */
     public function up()
     {
-        Schema::create('permasalahan_kerja', function (Blueprint $table) {
+        Schema::create('detail_permasalahan', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->longText('topik');
-            $table->boolean('status');
-            $table->foreignId('pkl_id')->constrained('pkl')->cascadeOnDelete();
+            $table->foreignId('permasalahan_kerja_id')->constrained('permasalahan_kerja')->cascadeOnDelete();
+            $table->longText('description');
+            $table->foreignId('user_id')->constrained('user')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreatePermasalahanKerjaTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('permasalahan_kerja');
+        Schema::dropIfExists('detail_permasalahan');
     }
 }

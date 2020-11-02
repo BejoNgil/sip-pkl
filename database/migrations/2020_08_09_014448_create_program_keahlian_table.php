@@ -14,7 +14,7 @@ class CreateProgramKeahlianTable extends Migration
     public function up()
     {
         Schema::create('program_keahlian', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama');
             $table->timestamps();
         });

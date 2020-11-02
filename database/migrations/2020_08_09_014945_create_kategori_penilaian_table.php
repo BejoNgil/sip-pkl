@@ -27,6 +27,7 @@ class CreateKategoriPenilaianTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('kategori_penilaian');
     }
 }

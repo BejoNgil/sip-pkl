@@ -14,7 +14,7 @@ class CreatePosisiTable extends Migration
     public function up()
     {
         Schema::create('posisi', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

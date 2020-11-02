@@ -15,12 +15,14 @@ class CreatePKLTable extends Migration
     {
         Schema::create('pkl', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('peserta_id')->constrained('peserta')->cascadeOnDelete();
-            $table->foreignId('pembimbing_id')->constrained('pembimbing')->cascadeOnDelete();
-            $table->foreignId('posisi_id')->constrained('posisi');
+            $table->foreignId('peserta_id')->constrained('peserta')->onDelete('cascade');
+            $table->foreignId('pembimbing_id')->constrained('pembimbing')->onDelete('cascade');
+            $table->foreignId('posisi_id')->constrained('posisi')->onDelete('cascade');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai')->nullable();
             $table->timestamps();
+
+
         });
     }
 
@@ -31,6 +33,7 @@ class CreatePKLTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('peserta_pembimbing');
     }
 }
