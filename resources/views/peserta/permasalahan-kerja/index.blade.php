@@ -24,9 +24,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Masalah</th>
-                                <th>Solusi</th>
+                                <th>Topik</th>
                                 <th>Pembimbing</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -35,68 +35,30 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item['tanggal']->format('d M Y') }}</td>
-                                    <td>{{ $item['masalah'] }}</td>
-                                    <td>{{ $item['solusi'] ?? '-' }}</td>
+                                    <td>{{ $item['topik'] }}</td>
                                     <td>{{ $pkl['pembimbing']['nama'] }}</td>
-                                    <td width="15%">
-                                        @if(!$item['solusi'])
-                                            <a href="javascript:void(0);" data-toggle="modal"
+                                    <td>
+                                        @if ($item['status'] == 0)
+                                            {!! '<span class="text-success">Open</span>' !!}
+                                        @else
+                                            {!! '<span class="text-danger">Close</span>' !!}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item['status'] == 0)
+                                        <a href="javascript:void(0);" data-toggle="modal"
                                                data-target="#updateResource-{{ $item['id'] }}"
-                                               class="btn btn-success"><i
+                                               class="btn btn-success btn-sm"><i
                                                     class="fa fa-pencil"></i> Ubah</a>
+                                                <a href="javascript:void(0);"
+                                                onclick="destroy('{{ $item['id'] }}')"
+                                                class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Hapus</a>
                                         @endif
                                         <a href="javascript:void(0);"
                                            onclick="destroy('{{ $item['id'] }}')"
-                                           class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</a>
+                                           class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>
-                                @if(!$item['solusi'])
-                                    @component('components.modal', ['id'=> 'updateResource-' . $item['id']])
-                                        @slot('title')
-                                            Ubah Permasalahan Kerja
-                                        @endslot
-                                        @slot('content')
-                                            <form action="{{ route('permasalahan-kerja.update', $item) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-body">
-                                                    @if($errors->any())
-                                                        <div class="alert alert-danger alert-dismissable">
-                                                            <a href="#" class="close" data-dismiss="alert"
-                                                               aria-label="close">×</a>
-                                                            <ul>
-                                                                @foreach($errors->all() as $error)
-                                                                    <li>{{ $error }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                    <div class="form-group">
-                                                        <label>Tanggal</label>
-                                                        <input type="date" class="form-control" name="tanggal" required
-                                                               value="{{ old('tanggal', $item['tanggal']->format('Y-m-d')) }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Nama Pembimbing</label>
-                                                        <input type="text" class="form-control" readonly
-                                                               value="{{ $pkl['pembimbing']['nama']  }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Uraian Masalah</label>
-                                                        <textarea name="masalah" rows="5"
-                                                                  class="form-control">{{ old('uraian', $item['uraian']) }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                        Batal
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                                </div>
-                                            </form>
-                                        @endslot
-                                    @endcomponent
-                                @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -130,13 +92,17 @@
                                value="{{ old('tanggal') }}">
                     </div>
                     <div class="form-group">
+                        <label>Topik</label>
+                        <input type="text" class="form-control" name="topik">
+                    </div>
+                    <div class="form-group">
                         <label>Nama Pembimbing</label>
                         <input type="text" class="form-control" readonly
                                value="{{ $pkl['pembimbing']['nama']  }}">
                     </div>
                     <div class="form-group">
                         <label>Uraian Masalah</label>
-                        <textarea name="masalah" rows="5" class="form-control">{{ old('uraian') }}</textarea>
+                        <textarea name="description" rows="5" class="form-control">{{ old('uraian') }}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

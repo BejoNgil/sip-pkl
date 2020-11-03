@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Peserta;
 
+use App\DetailPermasalahan;
 use App\Http\Controllers\Controller;
 use App\PermasalahanKerja;
 use App\PKL;
@@ -13,7 +14,7 @@ class PermasalahanKerjaController extends Controller
     public function index()
     {
         $pkl = PKL::with('pembimbing')->wherePesertaId(auth()->user()->authenticable_id)->first();
-        $permasalahanKerja = PermasalahanKerja::where('pkl_id', $pkl['id'])->get();
+        $permasalahanKerja = PermasalahanKerja::where('pkl_id', $pkl['id'])->orderBy('id', 'DESC')->get();
 
         return view('peserta.permasalahan-kerja.index', compact('permasalahanKerja','pkl'));
     }
@@ -21,13 +22,24 @@ class PermasalahanKerjaController extends Controller
     public function store(Request $request)
     {
         Session::flash('showCreateModal');
-
-        $validated = $request->validate([
+        $this->validate($request, [
             'tanggal' => 'required|date',
-            'masalah' => 'required|string'
+            'description' => 'required|string',
+            'topik' => 'required|string'
         ]);
 
-        PermasalahanKerja::create($validated + ['pkl_id' => auth()->user()->authenticable->pkl->id]);
+        $permasalahanKerja = new PermasalahanKerja();
+        $permasalahanKerja->tanggal = $request->tanggal;
+        $permasalahanKerja->topik = $request->topik;
+        $permasalahanKerja->status = 0;
+        $permasalahanKerja->pkl_id = auth()->user()->authenticable->pkl->id;
+        $permasalahanKerja->save();
+
+        $detailPermasalahan = new DetailPermasalahan();
+        $detailPermasalahan->permasalahan_kerja_id = $permasalahanKerja->id;
+        $detailPermasalahan->description = $request->description;
+        $detailPermasalahan->user_id = auth()->user()->authenticable->pkl->id;
+        $detailPermasalahan->save();
 
         Session::forget('showCreateModal');
         Session::flash('success', 'Berhasil menambahkan data');
