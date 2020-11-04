@@ -46,20 +46,21 @@
                                     </td>
                                     <td>
                                         @if ($item['status'] == 0)
-                                        <a href="javascript:void(0);" data-toggle="modal"
-                                               data-target="#updateResource-{{ $item['id'] }}"
-                                               class="btn btn-success btn-sm"><i
-                                                    class="fa fa-pencil"></i> Ubah</a>
+                                            @if ($item->respon_pembimbing->count() < 1)
+                                            <a href="javascript:void(0);" data-toggle="modal"
+                                                data-target="#updateResource-{{ $item['id'] }}"
+                                                class="btn btn-success btn-sm"><i
+                                                        class="fa fa-pencil"></i> Ubah</a>
                                                 <a href="javascript:void(0);"
                                                 onclick="destroy('{{ $item['id'] }}')"
                                                 class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Hapus</a>
+                                            @endif
                                         @endif
                                         <a href="javascript:void(0);"
                                            onclick="destroy('{{ $item['id'] }}')"
                                            class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>
-                                @if(!$item['solusi'])
                                 @component('components.modal', ['id'=> 'updateResource-' . $item['id']])
                                     @slot('title')
                                         Ubah Permasalahan Kerja
@@ -86,14 +87,20 @@
                                                            value="{{ old('tanggal', $item['tanggal']->format('Y-m-d')) }}">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Topik</label>
+                                                    <input type="text" class="form-control" name="topik" value="{{ $item['topik'] }}">
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Nama Pembimbing</label>
                                                     <input type="text" class="form-control" readonly
                                                            value="{{ $pkl['pembimbing']['nama']  }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Uraian Masalah</label>
+                                                    @foreach ($item->detail_masalah as $row)
                                                     <textarea name="masalah" rows="5"
-                                                              class="form-control">{{ old('uraian', $item['uraian']) }}</textarea>
+                                                              class="form-control">{{ old('uraian', $row['description']) }}</textarea>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -105,7 +112,6 @@
                                         </form>
                                     @endslot
                                 @endcomponent
-                            @endif
                             @endforeach
                             </tbody>
                         </table>
