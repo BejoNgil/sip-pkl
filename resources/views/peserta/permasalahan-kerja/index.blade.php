@@ -59,6 +59,53 @@
                                            class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>
+                                @if(!$item['solusi'])
+                                @component('components.modal', ['id'=> 'updateResource-' . $item['id']])
+                                    @slot('title')
+                                        Ubah Permasalahan Kerja
+                                    @endslot
+                                    @slot('content')
+                                        <form action="{{ route('permasalahan-kerja.update', $item) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-body">
+                                                @if($errors->any())
+                                                    <div class="alert alert-danger alert-dismissable">
+                                                        <a href="#" class="close" data-dismiss="alert"
+                                                           aria-label="close">×</a>
+                                                        <ul>
+                                                            @foreach($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                                <div class="form-group">
+                                                    <label>Tanggal</label>
+                                                    <input type="date" class="form-control" name="tanggal" required
+                                                           value="{{ old('tanggal', $item['tanggal']->format('Y-m-d')) }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Nama Pembimbing</label>
+                                                    <input type="text" class="form-control" readonly
+                                                           value="{{ $pkl['pembimbing']['nama']  }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Uraian Masalah</label>
+                                                    <textarea name="masalah" rows="5"
+                                                              class="form-control">{{ old('uraian', $item['uraian']) }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Batal
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    @endslot
+                                @endcomponent
+                            @endif
                             @endforeach
                             </tbody>
                         </table>
