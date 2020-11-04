@@ -56,8 +56,7 @@
                                                 class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Hapus</a>
                                             @endif
                                         @endif
-                                        <a href="javascript:void(0);"
-                                           onclick="destroy('{{ $item['id'] }}')"
+                                        <a href="{{ route('permasalahan-kerja.show', $item['id']) }}"
                                            class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>

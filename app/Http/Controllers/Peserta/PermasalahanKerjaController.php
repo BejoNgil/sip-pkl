@@ -67,14 +67,14 @@ class PermasalahanKerjaController extends Controller
             'topik' => 'required|string'
         ]);
 
-        $permasalahanKerja = new PermasalahanKerja();
+        $permasalahanKerja = PermasalahanKerja::find($permasalahanKerja->id);
         $permasalahanKerja->tanggal = $request->tanggal;
         $permasalahanKerja->topik = $request->topik;
         $permasalahanKerja->status = 0;
         $permasalahanKerja->pkl_id = auth()->user()->authenticable->pkl->id;
         $permasalahanKerja->update();
 
-        $detailPermasalahan = new DetailPermasalahan();
+        $detailPermasalahan = DetailPermasalahan::where('permasalahan_kerja_id', $permasalahanKerja->id)->first();
         $detailPermasalahan->permasalahan_kerja_id = $permasalahanKerja->id;
         $detailPermasalahan->description = $request->description;
         $detailPermasalahan->user_id = auth()->user()->id;
@@ -95,5 +95,34 @@ class PermasalahanKerjaController extends Controller
         Session::flash('success', 'Berhasil menghapus data');
 
         return route('permasalahan-kerja.index');
+    }
+
+    public function show($id)
+    {
+        $permasalahanKerja = PermasalahanKerja::with('pkl')->find($id);
+        $detailPermasalahan = DetailPermasalahan::where('permasalahan_kerja_id', $id)->orderBy('id', 'DESC')->get();
+        return view('peserta.permasalahan-kerja.show', compact('permasalahanKerja', 'detailPermasalahan'));
+    }
+
+    public function detailMasalah(Request $request, $id)
+    {
+        $detailPermasalahan = new DetailPermasalahan();
+        $detailPermasalahan->permasalahan_kerja_id = $id;
+        $detailPermasalahan->description = $request->description;
+        $detailPermasalahan->user_id = auth()->user()->id;
+        $detailPermasalahan->save();
+        Session::flash('success', 'Berhasil Merespon Pembimbing');
+
+        return redirect()->back();
+    }
+
+    public function close(Request $request, $id)
+    {
+        $permasalahanKerja = PermasalahanKerja::find($id);
+        $permasalahanKerja->status = 1;
+        $permasalahanKerja->update();
+        Session::flash('success', 'Permasalahan Kerja Di Tutup');
+
+        return redirect()->back();
     }
 }

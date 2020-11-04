@@ -40,7 +40,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::middleware('hasPKL')->group(function () {
             Route::resource('kegiatan', 'LogKegiatanController')->only(['index', 'store', 'update', 'destroy']);
-            Route::resource('permasalahan-kerja', 'PermasalahanKerjaController')->only(['index', 'store', 'update', 'destroy']);
+            Route::post('detail-permasalahan-kerja/{masalah_kerja}', 'PermasalahanKerjaController@detailMasalah')->name('detail-masalah-kerja.post');
+            Route::post('detail-permasalahan-close/{masalah_kerja}', 'PermasalahanKerjaController@close')->name('detail-masalah-kerja.close');
+            Route::resource('permasalahan-kerja', 'PermasalahanKerjaController')->only(['index', 'store', 'update', 'destroy', 'show']);
             Route::resource('bimbingan', 'BimbinganController')->only(['index', 'store', 'update', 'destroy']);
             Route::get('absensi', 'AbsensiController@index')->name('absensi.index');
             Route::post('absensi', 'AbsensiController@store')->name('absensi.store');
