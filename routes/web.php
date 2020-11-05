@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('bimbingan', 'BimbinganController@index')->name('kelola-bimbingan.index');
         Route::put('bimbingan/{bimbingan}', 'BimbinganController@approve')->name('kelola-bimbingan.approve');
         Route::get('permasalahan-kerja', 'PermasalahanKerjaController@index')->name('kelola-masalah.index');
+        Route::get('permasalahan-kerja/{masalah_kerja}', 'PermasalahanKerjaController@show')->name('kelola-masalah.show');
+        Route::post('permasalahan-kerja/{masalah_kerja}', 'PermasalahanKerjaController@detailMasalah')->name('kelola-masalah-kerja.post');
         Route::put('permasalahan-kerja/{permasalahanKerja}', 'PermasalahanKerjaController@update')->name('kelola-masalah.update');
         Route::get('nilai', 'PenilaianController@index')->name('kelola-nilai.index');
         Route::post('nilai/{pkl}', 'PenilaianController@assignNilai')->name('kelola-nilai.assign-nilai');

@@ -8,6 +8,7 @@ use App\PKL;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\DetailPermasalahan;
 
 class PermasalahanKerjaController extends Controller
 {
@@ -32,6 +33,25 @@ class PermasalahanKerjaController extends Controller
 
         Session::forget('showModal');
         Session::flash('success', 'Berhasil disimpan');
+
+        return redirect()->back();
+    }
+
+    public function show($id)
+    {
+        $permasalahanKerja = PermasalahanKerja::with('pkl')->find($id);
+        $detailPermasalahan = DetailPermasalahan::where('permasalahan_kerja_id', $id)->orderBy('id', 'DESC')->get();
+        return view('pembimbing.permasalahan-kerja.show', compact('permasalahanKerja', 'detailPermasalahan'));
+    }
+
+    public function detailMasalah(Request $request, $id)
+    {
+        $detailPermasalahan = new DetailPermasalahan();
+        $detailPermasalahan->permasalahan_kerja_id = $id;
+        $detailPermasalahan->description = $request->description;
+        $detailPermasalahan->user_id = auth()->user()->id;
+        $detailPermasalahan->save();
+        Session::flash('success', 'Berhasil Merespon Peserta');
 
         return redirect()->back();
     }

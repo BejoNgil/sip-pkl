@@ -33,18 +33,6 @@
                                 @endif
                             </td>
                         </tr>
-                        @if ($permasalahanKerja->status == 0)
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <form action="{{ route('detail-masalah-kerja.close', $permasalahanKerja->id) }}" method="POST">
-                                    @csrf
-                                    <button class="btn btn-success btn-sm">Close</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endif
                     </table>
                 </div>
             </div>
@@ -63,7 +51,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form action="{{ route('detail-masalah-kerja.post', $permasalahanKerja->id) }}" method="POST">
+                        <form action="{{ route('kelola-masalah-kerja.post', $permasalahanKerja->id) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <textarea name="description" id="" cols="90" rows="10"></textarea>
@@ -83,7 +71,7 @@
                 @if ($item->user_id == auth()->user()->id)
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        Respon Peserta
+                        Respon Pembimbing
                     </div>
                     <div class="panel-body">
                         {!! $item->description !!}
@@ -92,7 +80,7 @@
                 @else
                 <div class="panel panel-warning">
                     <div class="panel-heading">
-                        Respon Pembimbing
+                        Respon Peserta
                     </div>
                     <div class="panel-body">
                         {!! $item->description !!}

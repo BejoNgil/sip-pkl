@@ -17,8 +17,8 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Peserta</th>
-                                <th>Masalah</th>
-                                <th>Solusi</th>
+                                <th>Subject</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -30,14 +30,17 @@
                                     <td><a href="javascript:void(0);" data-toggle="modal" data-target="#pesertaInfo"
                                            data-id="{{ $item['pkl']['peserta']['id'] }}">{{ $item['pkl']['peserta']['nama'] }}</a>
                                     </td>
-                                    <td>{{ $item['masalah'] }}</td>
-                                    <td>{{ $item['solusi'] ?? '-' }}</td>
+                                    <td>{{ $item['topik'] }}</td>
+                                    <td>
+                                        @if ($item['status'] == 0)
+                                            {!! '<span class="text-success">Open</span>' !!}
+                                        @else
+                                            {!! '<span class="text-danger">Close</span>' !!}
+                                        @endif
+                                    </td>
                                     <td width="15%">
-                                        <a href="javascript:void(0);" data-toggle="modal"
-                                           data-target="#updateResource-{{ $item['id'] }}"
-                                           class="btn btn-success"><i
-                                                class="fa fa-pencil"></i> {{ $item['solusi'] != null ? 'Ubah Solusi' : 'Beri Solusi' }}
-                                        </a>
+                                        <a href="{{ route('kelola-masalah.show', $item['id']) }}"
+                                           class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>
                                 @component('components.modal', ['id'=> 'updateResource-' . $item['id']])
