@@ -17,7 +17,7 @@ class BimbinganController extends Controller
         $pkl = PKL::with([
             'peserta', 'bimbingan' => function($sql)
             {
-                $sql->where('is_approve', 0)->first();
+                $sql->orderBy('id', 'DESC')->first();
             }
         ])
                 ->get();
