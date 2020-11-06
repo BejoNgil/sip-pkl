@@ -75,5 +75,10 @@ class PKL extends Model
         return $count > 0 ? round($sum / $count, 2) : 0;
     }
 
+    public function bimbingan()
+    {
+        return $this->hasMany(Bimbingan::class, 'pkl_id');
+    }
+
 
 }

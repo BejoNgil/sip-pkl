@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pembimbing;
 
 use App\Bimbingan;
 use App\Http\Controllers\Controller;
+use App\Peserta;
 use App\PKL;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -13,11 +14,18 @@ class BimbinganController extends Controller
 {
     public function index()
     {
+        $pkl = PKL::with([
+            'peserta', 'bimbingan' => function($sql)
+            {
+                $sql->where('is_approve', 0)->first();
+            }
+        ])
+                ->get();
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
             return $query->where('pembimbing_id', auth()->user()->authenticable_id);
         })->get();
 
-        return view('pembimbing.bimbingan.index', compact('bimbingan'));
+        return view('pembimbing.bimbingan.index', compact('bimbingan', 'pkl'));
     }
 
     public function approve(Request $request, Bimbingan $bimbingan)
@@ -29,5 +37,15 @@ class BimbinganController extends Controller
         Session::flash('success', 'Bimbingan telah disetujui');
 
         return redirect()->back();
+    }
+
+    public function show($id)
+    {
+        $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
+            return $query->where('pembimbing_id', auth()->user()->authenticable_id);
+        })
+        ->orderBy('id', 'DESC')
+        ->get();
+        return view('pembimbing.bimbingan.show', compact('bimbingan'));
     }
 }

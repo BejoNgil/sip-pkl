@@ -15,87 +15,31 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
                                 <th>Peserta</th>
+                                <th>Tanggal</th>
                                 <th>Uraian</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($bimbingan as $item)
+                            @foreach ($pkl as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item['tanggal']->format('d M Y') }}</td>
                                     <td>
                                         <a href="javascript:void(0);" data-toggle="modal" data-target="#pesertaInfo"
-                                           data-id="{{ $item['pkl']['peserta']['id'] }}">{{ $item['pkl']['peserta']['nama'] }}</a>
+                                           data-id="{{ $item->peserta->id }}">{{ $item->peserta->nama }}</a>
                                     </td>
-                                    <td>{{ $item['uraian'] }}</td>
-                                    <td>{{ $item['is_approve'] ? 'Sudah disetujui' : 'Belum disetujui' }}</td>
+                                    <td>{{ $item->bimbingan['0']['tanggal']->format('d M Y') }}</td>
+                                    <td>{{ $item->bimbingan['0']['uraian'] }}</td>
+                                    <td>
+                                        {{ $item->bimbingan['0']['is_approve'] ? 'Sudah disetujui' : 'Belum disetujui' }}
+                                    </td>
                                     <td width="15%">
-                                        @if(!$item['is_approve'])
-                                            <a href="javascript:void(0);" data-toggle="modal"
-                                               data-target="#updateResource-{{ $item['id'] }}"
-                                               class="btn btn-success"><i
-                                                    class="fa fa-pencil"></i> Konfirmasi</a>
-                                        @else
-                                            -
-                                        @endif
+                                        <a href="{{ route('kelola-bimbingan.show', $item->bimbingan['0']['id']) }}"
+                                           class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>
-                                @if(!$item['is_approve'])
-                                    @component('components.modal', ['id'=> 'updateResource-' . $item['id']])
-                                        @slot('title')
-                                            Konfirmasi Bimbingan
-                                        @endslot
-                                        @slot('content')
-                                            <form action="{{ route('kelola-bimbingan.approve', $item) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-body">
-                                                    @if($errors->any())
-                                                        <div class="alert alert-danger alert-dismissable">
-                                                            <a href="#" class="close" data-dismiss="alert"
-                                                               aria-label="close">×</a>
-                                                            <ul>
-                                                                @foreach($errors->all() as $error)
-                                                                    <li>{{ $error }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                    <div class="form-group">
-                                                        <label>Tanggal</label>
-                                                        <div>
-                                                            {{ $item['tanggal']->format('d M Y') }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Nama Peserta</label>
-                                                        <div>
-                                                            <a href="javascript:void(0);" data-toggle="modal"
-                                                               data-target="#pesertaInfo"
-                                                               data-id="{{ $item['pkl']['peserta']['id'] }}">{{ $item['pkl']['peserta']['nama'] }}</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Uraian</label>
-                                                        <div>
-                                                            {{ $item['uraian'] }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                        Batal
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Setujui</button>
-                                                </div>
-                                            </form>
-                                        @endslot
-                                    @endcomponent
-                                @endif
                             @endforeach
                             </tbody>
                         </table>

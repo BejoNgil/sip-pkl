@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Pembimbing', 'prefix' => 'pembimbing', 'middleware' => 'can:pembimbing'], function () {
         Route::resource('bimbingan', 'BimbinganController')->names('kelola-bimbingan')->only(['index', 'update']);
         Route::get('bimbingan', 'BimbinganController@index')->name('kelola-bimbingan.index');
+        Route::get('bimbingan/{bimbingan}', 'BimbinganController@show')->name('kelola-bimbingan.show');
         Route::put('bimbingan/{bimbingan}', 'BimbinganController@approve')->name('kelola-bimbingan.approve');
         Route::get('permasalahan-kerja', 'PermasalahanKerjaController@index')->name('kelola-masalah.index');
         Route::get('permasalahan-kerja/{masalah_kerja}', 'PermasalahanKerjaController@show')->name('kelola-masalah.show');
