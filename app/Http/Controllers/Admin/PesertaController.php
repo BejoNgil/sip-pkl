@@ -10,6 +10,11 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\NotifVerifikasiPeserta;
+use App\User;
+use Illuminate\Support\Facades\Mail;
+use Crypt;
+
 
 class PesertaController extends Controller
 {
@@ -73,11 +78,15 @@ class PesertaController extends Controller
 
             $peserta = Peserta::create($validated);
             $peserta->authenticable()->create(
-                $validated + ['email_verified_at' => now(), 'password' => 'password']
+                $validated + ['password' => 'password']
             );
 
             Session::flash('success', 'Berhasil Menambahkan Siswa');
             DB::commit();
+
+            $hash = Crypt::encrypt($peserta->id);
+            $url = 'http://sip-pkl.test/peserta/confirmation?hash='.$hash;
+            Mail::to($request->email)->send(new NotifVerifikasiPeserta($request->nama, $url));
         } catch (\Exception $exception) {
             DB::rollBack();
             Session::flash('error', 'Terjadi Kesalahan pada Sistem');

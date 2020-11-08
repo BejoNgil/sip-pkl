@@ -10,6 +10,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'can:admin'], function () {
+        Route::get('/peserta/test-email', 'PesertaController@testEmail')->name('peserta.test-email');
         Route::resource('peserta', 'PesertaController', ['parameters' => ['peserta' => 'peserta']]);
         Route::patch('peserta-reset-password/{peserta}', 'PesertaController@resetPassword')->name('peserta.reset-password');
         Route::resource('admin', 'AdminController')->except(['create', 'edit', 'show']);
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['namespace' => 'Peserta', 'prefix' => 'peserta', 'middleware' => ['can:peserta']], function () {
+        Route::get('/confirmation', 'ProfilController@confirmation')->name('peserta.confirmation');
         Route::get('profil', 'ProfilController@index')->name('peserta.profile');
         Route::put('profil', 'ProfilController@update');
 

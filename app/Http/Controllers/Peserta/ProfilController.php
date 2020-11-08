@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Crypt;
+use App\User;
 
 class ProfilController extends Controller
 {
@@ -82,5 +84,15 @@ class ProfilController extends Controller
         }
 
         return redirect()->route('peserta.profile');
+    }
+
+    public function confirmation(Request $request)
+    {
+        $verified = date('Y-m-d H:i:s', strtotime(now()));
+        $value = Crypt::decrypt($request->hash);
+        $user = User::where('authenticable_id', $value)->first();
+        $user->email_verified_at = $verified;
+        $user->update();
+        return view('administrator.peserta.confirmation');
     }
 }
