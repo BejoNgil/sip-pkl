@@ -85,7 +85,7 @@ class PesertaController extends Controller
             DB::commit();
 
             $hash = Crypt::encrypt($peserta->id);
-            $url = 'http://sip-pkl.test/peserta/confirmation?hash='.$hash;
+            $url = url().'peserta/confirmation?hash='.$hash;
             Mail::to($request->email)->send(new NotifVerifikasiPeserta($request->nama, $url));
         } catch (\Exception $exception) {
             DB::rollBack();
