@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Crypt;
 use App\User;
+use Illuminate\Support\Carbon;
 
 class ProfilController extends Controller
 {
@@ -88,7 +89,7 @@ class ProfilController extends Controller
 
     public function confirmation(Request $request)
     {
-        $verified = date('Y-m-d H:i:s', strtotime(now()));
+        $verified = Carbon::now()->format('Y-m-d H:i:s');
         $value = Crypt::decrypt($request->hash);
         $user = User::where('authenticable_id', $value)->first();
         $user->email_verified_at = $verified;
