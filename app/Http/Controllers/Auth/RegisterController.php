@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Crypt;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifVerifikasiPeserta;
 
 class RegisterController extends Controller
 {
@@ -96,6 +99,9 @@ class RegisterController extends Controller
             $peserta = Peserta::create($data);
             $user = $peserta->authenticable()->create($data);
             DB::commit();
+            $hash = Crypt::encrypt($peserta->id);
+            $url = url('peserta/confirmation?hash='.$hash);
+            Mail::to($data['email'])->send(new NotifVerifikasiPeserta($data['nama'], $url));
             return $user;
         } catch (\Throwable $throwable) {
             return $throwable;
