@@ -17,10 +17,11 @@ class BimbinganController extends Controller
         $pkl = PKL::with([
             'peserta', 'bimbingan' => function($sql)
             {
-                $sql->orderBy('id', 'DESC')->first();
+                return $sql->orderBy('id', 'DESC')->first();
             }
         ])
                 ->get();
+        dd($pkl);
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
             return $query->where('pembimbing_id', auth()->user()->authenticable_id);
         })->get();
