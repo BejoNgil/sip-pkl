@@ -47,7 +47,7 @@
                                     </td>
                                     <td width="15%">
                                         @if (!empty($item->bimbingan['0']['id']))
-                                        <a href="{{ route('kelola-bimbingan.show', $item->pkl->id) }}"
+                                        <a href="{{ route('kelola-bimbingan.show', $item->id) }}"
                                             class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                                         @endif
 
