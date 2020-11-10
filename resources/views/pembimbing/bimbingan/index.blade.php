@@ -30,14 +30,27 @@
                                         <a href="javascript:void(0);" data-toggle="modal" data-target="#pesertaInfo"
                                            data-id="{{ $item->peserta->id }}">{{ $item->peserta->nama }}</a>
                                     </td>
-                                    <td>{{ $item->bimbingan['0']['tanggal']->format('d M Y') }}</td>
-                                    <td>{{ $item->bimbingan['0']['uraian'] }}</td>
                                     <td>
-                                        {{ $item->bimbingan['0']['is_approve'] ? 'Sudah disetujui' : 'Belum disetujui' }}
+                                        @if (!empty($item->bimbingan['0']['tanggal']))
+                                            {{ $item->bimbingan['0']['tanggal']->format('d M Y') }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (!empty($item->bimbingan['0']['uraian']))
+                                            {{ $item->bimbingan['0']['uraian'] }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (!empty($item->bimbingan['0']['is_approve']))
+                                            {{ $item->bimbingan['0']['is_approve'] ? 'Sudah disetujui' : 'Belum disetujui' }}
+                                        @endif
                                     </td>
                                     <td width="15%">
+                                        @if (!empty($item->bimbingan['0']['id']))
                                         <a href="{{ route('kelola-bimbingan.show', $item->bimbingan['0']['id']) }}"
-                                           class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
+                                            class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
+                                        @endif
+
                                     </td>
                                 </tr>
                             @endforeach
