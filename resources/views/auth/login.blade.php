@@ -59,7 +59,7 @@
 {{--                                {{ __('Forgot Your Password?') }}--}}
 {{--                            </a>--}}
 {{--                        @endif--}}
-                        <a class="btn btn-link" href="{{ route('register') }}">
+                        <a class="btn btn-link" href="{{ route('pendaftaran.index') }}">
                             {{ __('Daftar Sebagai Peserta') }}
                         </a>
                     </form>

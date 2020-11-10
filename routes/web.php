@@ -5,10 +5,14 @@ Route::get('/', function () {
 });
 
 Auth::routes([
-    'register' => true, // Registration Routes...
+    'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
+
+Route::get('/pendaftaran', 'PendaftaranController@index')->name('pendaftaran.index');
+Route::get('/pendaftaran/success', 'PendaftaranController@success')->name('pendaftaran.success');
+Route::post('/pendaftaran', 'PendaftaranController@store')->name('pendaftaran.store');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
