@@ -17,7 +17,6 @@ class BimbinganController extends Controller
         $pkl = PKL::with([
             'peserta', 'pembimbing_one'])
                 ->get();
-        dd($pkl);
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
             return $query->where('pembimbing_id', auth()->user()->authenticable_id);
         })->get();
