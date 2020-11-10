@@ -41,9 +41,8 @@ class BimbinganController extends Controller
 
     public function show($id)
     {
-        $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
-            return $query->where('pembimbing_id', auth()->user()->authenticable_id);
-        })
+        $bimbingan = Bimbingan::with('pkl.peserta')
+        ->where('pkl_id', $id)
         ->orderBy('id', 'DESC')
         ->get();
         return view('pembimbing.bimbingan.show', compact('bimbingan'));
