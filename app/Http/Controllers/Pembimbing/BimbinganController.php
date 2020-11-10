@@ -17,7 +17,7 @@ class BimbinganController extends Controller
         $pkl = PKL::with([
             'peserta', 'bimbingan' => function($sql)
             {
-                return $sql->orderBy('id', 'DESC');
+                return $sql->orderBy('id', 'DESC')->limit(1);
             }
         ])
                 ->get();
