@@ -80,7 +80,7 @@ class PKL extends Model
         return $this->hasMany(Bimbingan::class, 'pkl_id');
     }
 
-    public function pembimbing_one()
+    public function bimbingan_one()
     {
         return $this->hasOne(Bimbingan::class, 'pkl_id');
     }

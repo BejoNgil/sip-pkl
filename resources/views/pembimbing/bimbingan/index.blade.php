@@ -31,19 +31,13 @@
                                            data-id="{{ $item->peserta->id }}">{{ $item->peserta->nama }}</a>
                                     </td>
                                     <td>
-                                        @if (!empty($item->bimbingan['0']['tanggal']))
-                                            {{ $item->bimbingan['0']['tanggal']->format('d M Y') }}
-                                        @endif
+                                        {{ $item->bimbingan_one->tanggal->format('d M Y')}}
                                     </td>
                                     <td>
-                                        @if (!empty($item->bimbingan['0']['uraian']))
-                                            {{ $item->bimbingan['0']['uraian'] }}
-                                        @endif
+                                        {{ $item->bimbingan_one->uraian }}
                                     </td>
                                     <td>
-                                        @if (!empty($item->bimbingan['0']['is_approve']))
-                                            {{ $item->bimbingan['0']['is_approve'] ? 'Sudah disetujui' : 'Belum disetujui' }}
-                                        @endif
+                                        {{ $item->bimbingan_one->is_approve ? 'Sudah disetujui' : 'Belum disetujui'}}
                                     </td>
                                     <td width="15%">
                                         @if (!empty($item->bimbingan['0']['id']))

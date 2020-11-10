@@ -15,7 +15,7 @@ class BimbinganController extends Controller
     public function index()
     {
         $pkl = PKL::with([
-            'peserta', 'pembimbing_one'])
+            'peserta', 'bimbingan_one'])
                 ->get();
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
             return $query->where('pembimbing_id', auth()->user()->authenticable_id);
