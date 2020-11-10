@@ -15,11 +15,7 @@ class BimbinganController extends Controller
     public function index()
     {
         $pkl = PKL::with([
-            'peserta', 'bimbingan' => function($sql)
-            {
-                return $sql->orderBy('id', 'DESC')->limit(1);
-            }
-        ])
+            'peserta', 'pembimbing_one'])
                 ->get();
         dd($pkl);
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
