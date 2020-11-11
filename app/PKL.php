@@ -65,7 +65,7 @@ class PKL extends Model
 
     public function nilai()
     {
-        return $this->hasMany(Penilaian::class,'pkl_id');
+        return $this->hasMany(Penilaian::class, 'pkl_id');
     }
 
     public function getTotalNilaiAttribute()
@@ -82,8 +82,6 @@ class PKL extends Model
 
     public function bimbingan_one()
     {
-        return $this->hasOne(Bimbingan::class, 'pkl_id');
+        return $this->hasOne(Bimbingan::class, 'pkl_id', 'id');
     }
-
-
 }

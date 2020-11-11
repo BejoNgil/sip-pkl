@@ -20,7 +20,6 @@ class BimbinganController extends Controller
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
             return $query->where('pembimbing_id', auth()->user()->authenticable_id);
         })->get();
-
         return view('pembimbing.bimbingan.index', compact('bimbingan', 'pkl'));
     }
 
