@@ -44,4 +44,9 @@ class Pembimbing extends Model
     {
         return $this->morphOne(User::class, 'authenticable');
     }
+
+    public function pkl()
+    {
+        return $this->hasMany('App\PKL');
+    }
 }

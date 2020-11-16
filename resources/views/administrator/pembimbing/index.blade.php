@@ -27,6 +27,7 @@
                                 <th>Jenis Kelamin</th>
                                 <th>Divisi</th>
                                 <th>Email</th>
+                                <th>Jumlah Peserta</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                     <td>{{ $item['jenis_kelamin'] }}</td>
                                     <td>{{ $item['divisi'] }}</td>
                                     <td>{{ $item['authenticable']['email'] }}</td>
+                                    <td>{{ $item->pkl->count(). ' Peserta' }}</td>
                                     <td width="15%">
                                         <a href="javascript:void(0);" data-toggle="modal"
                                            data-target="#updatePembimbing-{{ $item['id'] }}" class="btn btn-success"><i

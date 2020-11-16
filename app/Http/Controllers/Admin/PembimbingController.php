@@ -16,7 +16,7 @@ class PembimbingController extends Controller
      */
     public function index()
     {
-        $pembimbing = Pembimbing::with('authenticable')->get();
+        $pembimbing = Pembimbing::with('pkl', 'authenticable')->get();
 
         return view('administrator.pembimbing.index', compact('pembimbing'));
     }
