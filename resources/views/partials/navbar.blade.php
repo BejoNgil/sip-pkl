@@ -6,7 +6,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ route('home') }}"><strong>SIP-PKL</strong></a>
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('logo-new.png') }}" alt="" style="height: 45px; width: 150px; margin: -7px;">
+        </a>
         <div id="sideNav" href="">
             <i class="fa fa-bars icon"></i>
         </div>
