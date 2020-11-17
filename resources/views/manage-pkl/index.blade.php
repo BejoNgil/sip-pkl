@@ -50,8 +50,9 @@
                                         @endif
                                     </td>
                                     <td width="20%">
-                                        <a href="#" class="btn btn-info"><i
-                                                class="fa fa-eye"></i> Lihat Detail</a>
+                                        <a href="javascript:void(0);" class="btn btn-info" data-toggle="modal" data-target="#jobdescInfo"
+                                        data-id="{{ $item->id }}"><i
+                                                class="fa fa-eye"></i> Job Desc</a>
                                                                                {{-- <a href="javascript:void(0);" data-toggle="modal"--}}
                                         {{--                                           data-target="#updateResource-{{ $item['id'] }}" class="btn btn-success"><i--}}
                                         {{--                                                class="fa fa-pencil"></i> Ubah</a> --}}
@@ -152,6 +153,10 @@
                         <label for="tanggal_mulai">Tanggal Mulai</label>
                         <input type="date" class="form-control" name="tanggal_mulai" id="tanggal_mulai" required>
                     </div>
+                    <div class="form-group">
+                        <label for="peserta" class="control-label">Job Desc</label>
+                        <textarea name="jobdesc" id="" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -161,6 +166,7 @@
         @endslot
     @endcomponent
     @include('components.peserta-info-modal')
+    @include('components.jobdesc-info-modal')
 @endsection
 @push('scripts')
     <script>

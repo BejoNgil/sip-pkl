@@ -14,7 +14,22 @@ class PosisiSeeder extends Seeder
     {
         //
         $posisi = new Posisi();
-        $posisi->name = "TI";
+        $posisi->nama = "IT Support";
+        $posisi->is_active = 1;
+        $posisi->save();
+
+        $posisi = new Posisi();
+        $posisi->nama = "Website";
+        $posisi->is_active = 1;
+        $posisi->save();
+
+        $posisi = new Posisi();
+        $posisi->nama = "Postingan";
+        $posisi->is_active = 1;
+        $posisi->save();
+
+        $posisi = new Posisi();
+        $posisi->nama = "Instagram";
         $posisi->is_active = 1;
         $posisi->save();
     }

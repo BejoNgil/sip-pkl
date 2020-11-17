@@ -40,7 +40,8 @@ class PKL extends Model
         'pembimbing_id',
         'tanggal_mulai',
         'tanggal_selesai',
-        'posisi_id'
+        'posisi_id',
+        'jobdesc'
     ];
 
     protected $casts = [

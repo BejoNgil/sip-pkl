@@ -20,6 +20,7 @@ class CreatePKLTable extends Migration
             $table->foreignId('posisi_id')->constrained('posisi')->onDelete('cascade');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai')->nullable();
+            $table->longText('jobdesc')->nullable();
             $table->timestamps();
 
 

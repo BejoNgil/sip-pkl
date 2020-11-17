@@ -35,6 +35,7 @@ class ManagePKLController extends Controller
             'pembimbing_id' => 'required|exists:pembimbing,id',
             'posisi_id' => 'required|exists:posisi,id',
             'tanggal_mulai' => 'required|date',
+            'jobdesc' => 'required'
         ]);
         $dt = Carbon::create($request->tanggal_mulai);
         Session::forget('showCreateModal');
@@ -44,6 +45,7 @@ class ManagePKLController extends Controller
         $pkl->posisi_id = $request->posisi_id;
         $pkl->tanggal_mulai = $request->tanggal_mulai;
         $pkl->tanggal_selesai = date('Y-m-d', strtotime($dt->addDays(30)));
+        $pkl->jobdesc = $request->jobdesc;
         $pkl->save();
 
         Session::flash('success', 'Berhasil Menugaskan Peserta');
@@ -51,5 +53,10 @@ class ManagePKLController extends Controller
         return redirect()->back();
     }
 
-    
+    public function showJobdesc(PKL $pkl)
+    {
+        return view('partials.jobdesc-info', compact('pkl'));
+    }
+
+
 }

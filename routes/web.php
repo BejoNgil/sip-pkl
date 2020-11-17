@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Manage', 'prefix' => 'manage', 'middleware' => ['can:admin' || 'can:pembimbing']], function () {
         Route::get('pkl', 'ManagePKLController@index')->name('pkl.index');
         Route::post('pkl', 'ManagePKLController@store')->name('pkl.store');
+        Route::get('jobdesc/{pkl}', 'ManagePKLController@showJobdesc')->name('resource.jobdesc.show');
     });
 
     Route::group(['namespace' => 'Resource', 'prefix' => 'resource', 'middleware' => ['can:admin' || 'can:pembimbing']], function () {
