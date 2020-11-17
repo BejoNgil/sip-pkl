@@ -20,6 +20,7 @@
                         <table class="table table-striped table-bordered table-hover data-table">
                             <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>NIS</th>
                                 {{-- <th>Email</th> --}}
@@ -30,6 +31,7 @@
                             <tbody>
                             @foreach ($peserta as $item)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item['nama'] }}</td>
                                     <td>{{ $item['nis'] }}</td>
                                     {{-- <td>{{ $item['authenticable']['email'] }}</td> --}}

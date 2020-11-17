@@ -13,6 +13,7 @@ use App\Peserta;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PendaftaranController extends Controller
 {
@@ -41,20 +42,18 @@ class PendaftaranController extends Controller
         ]);
         if ($request['sekolah']['nama'] ?? null) {
             $sekolah = Sekolah::create($request['sekolah']);
-            $data['sekolah_id'] = $sekolah['id'];
         }
 
-        if ($data['program']['nama'] ?? null) {
-            $program = ProgramKeahlian::create($data['program']);
-            $data['program_keahlian_id'] = $program['id'];
+        if ($request['program']['nama'] ?? null) {
+            $program = ProgramKeahlian::create($request['program']);
         }
         //$peserta = Peserta::create($data);
         $peserta = new Peserta();
         $peserta->nama = $request->nama;
         $peserta->nis = $request->nis;
         $peserta->jenis_kelamin = $request->jenis_kelamin;
-        $peserta->sekolah_id = ($request->sekolah_id == '') ? $sekolah['id'] : $request->sekolah_id;
-        $peserta->program_keahlian_id = ($request->program_keahlian_id == '') ? $program['id'] : $request->program_keahlian_id;
+        $peserta->sekolah_id = ($request->sekolah_id == '') ? $sekolah->id : $request->sekolah_id;
+        $peserta->program_keahlian_id = ($request->program_keahlian_id == '') ? $program->id : $request->program_keahlian_id;
         $peserta->save();
 
 
@@ -67,11 +66,12 @@ class PendaftaranController extends Controller
         $user->authenticable_id = $peserta->id;
         $user->save();*/
 
-        Auth::login($user);
+        //Auth::login($user);
         $hash = Crypt::encrypt($peserta->id);
         $url = url('peserta/confirmation?hash='.$hash);
         Mail::to($request->email)->send(new NotifVerifikasiPeserta($request->nama, $url));
-        return redirect('home');
+        Session::flash('success', 'Mendaftar Sebagai Peserta PKL, Silahkan Cek email untuk verifikasi !!');
+        return redirect()->route('pendaftaran.index');
     }
 
     public function success()
