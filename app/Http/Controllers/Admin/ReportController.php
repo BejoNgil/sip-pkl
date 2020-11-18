@@ -34,10 +34,27 @@ class ReportController extends Controller
             $data['pkl'] = PKL::with(['peserta', 'pembimbing', 'posisi', 'nilai'])->whereBetween('tanggal_mulai', [$request->tgl_mulai, $request->tgl_selesai])
                     ->whereBetween('tanggal_selesai', [$request->tgl_mulai, $request->tgl_selesai])
                     ->get();
+        }else if($request->pembimbing != 0 & $request->divisi == 0)
+        {
+            $data['pkl'] = PKL::with(['peserta', 'pembimbing', 'posisi', 'nilai'])->whereBetween('tanggal_mulai', [$request->tgl_mulai, $request->tgl_selesai])
+                    ->whereBetween('tanggal_selesai', [$request->tgl_mulai, $request->tgl_selesai])
+                    ->where('pembimbing_id', $request->pembimbing)
+                    ->get();
+        }else if($request->pembimbing == 0 & $request->divisi != 0) {
+            $data['pkl'] = PKL::with(['peserta', 'pembimbing', 'posisi', 'nilai'])->whereBetween('tanggal_mulai', [$request->tgl_mulai, $request->tgl_selesai])
+                    ->whereBetween('tanggal_selesai', [$request->tgl_mulai, $request->tgl_selesai])
+                    ->where('posisi_id', $request->divisi)
+                    ->get();
+        }else {
+            $data['pkl'] = PKL::with(['peserta', 'pembimbing', 'posisi', 'nilai'])->whereBetween('tanggal_mulai', [$request->tgl_mulai, $request->tgl_selesai])
+                    ->whereBetween('tanggal_selesai', [$request->tgl_mulai, $request->tgl_selesai])
+                    ->where('posisi_id', $request->divisi)
+                    ->where('pembimbing_id', $request->pembimbing)
+                    ->get();
         }
 
         $pdf = PDF::loadView('pdf.laporan-pkl', ['data' => $data])->setPaper('A4');
-        return $pdf->stream();
-        //return $pdf->download('surat-laporan-pkl.pdf');
+        //return $pdf->stream();
+        return $pdf->download('surat-laporan-pkl.pdf');
     }
 }
