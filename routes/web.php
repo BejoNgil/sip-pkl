@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('posisi', 'PosisiController')->except(['create', 'edit', 'show']);
         Route::get('profil', 'ProfilController@index')->name('admin.profile');
         Route::put('profil', 'ProfilController@update');
+        Route::get('/laporan-pkl', 'ReportController@index')->name('laporan-pkl.index');
+        Route::post('/laporan-pdf', 'ReportController@exportPdf')->name('laporan-pkl.pdf');
     });
 
     Route::group(['namespace' => 'Pembimbing', 'prefix' => 'pembimbing', 'middleware' => 'can:pembimbing'], function () {

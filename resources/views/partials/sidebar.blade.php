@@ -127,6 +127,11 @@
             {{--            <li>--}}
             {{--                <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>--}}
             {{--            </li>--}}
+            @canany(['admin'])
+            <li>
+                <a href="{{ route('laporan-pkl.index') }}"><i class="fa fa-file"></i> Laporan PKL</a>
+            </li>
+            @endcanany
         </ul>
 
     </div>
