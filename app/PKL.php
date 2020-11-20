@@ -83,6 +83,6 @@ class PKL extends Model
 
     public function bimbingan_one()
     {
-        return $this->hasOne(Bimbingan::class, 'pkl_id', 'id');
+        return $this->hasOne(Bimbingan::class, 'pkl_id', 'id')->orderBy('id', 'DESC');
     }
 }
