@@ -41,13 +41,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if (!empty($item->bimbingan_one->is_approve))
-                                            @if ($item->bimbingan_one->is_approve == 0)
-                                                {{ 'Belum disetujui' }}
-                                            @else
-                                                {{ 'Sudah disetujui' }}
-                                            @endif
-                                        @endif
+                                        {{ $item->bimbingan_one->is_approve ? 'Sudah disetujui' : 'Belum disetujui' }}
                                     </td>
                                     <td width="15%">
                                         @if (!empty($item->bimbingan['0']['id']))
