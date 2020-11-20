@@ -41,6 +41,7 @@
                                         @endif
                                     </td>
                                     <td>
+                                        {{ $item->bimbingan_one->is_approve }}
                                         @if (!empty($item->bimbingan_one->is_approve))
                                         {{ ($item->bimbingan_one->is_approve == true) ? 'Sudah disetujui' : 'Belum disetuji' }}
                                         @endif
