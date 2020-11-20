@@ -1,6 +1,7 @@
 @extends('layouts.base-app')
 @push('style')
 <link href="{{  asset('assets/js/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet" />
+<link href="{{  asset('assets/css/summernote.min.css') }}" rel="stylesheet" />
 @endpush
 @section('body', 'default')
 @section('content')
@@ -29,6 +30,7 @@
 @push('scripts')
 <script src="{{ asset('assets/js/dataTables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('assets/js/dataTables/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('assets/js/summernote.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         $('.data-table').dataTable();

@@ -155,7 +155,7 @@
                     </div>
                     <div class="form-group">
                         <label for="peserta" class="control-label">Job Desc</label>
-                        <textarea name="jobdesc" id="" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="jobdesc" cols="30" rows="20" class="form-control" id="summernote"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -210,5 +210,11 @@
                 }
             }));
         }
+
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 150,
+            });
+        });
     </script>
 @endpush
