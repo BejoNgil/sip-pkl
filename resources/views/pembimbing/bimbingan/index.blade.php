@@ -43,9 +43,9 @@
                                     <td>
                                         @if (!empty($item->bimbingan_one->is_approve))
                                             @if ($item->bimbingan_one->is_approve == 0)
-                                                {{ 'Sudah disetujui' }}
+                                                {{ 'Belum disetujui' }}
                                             @else
-                                                {{ 'Belum disetuji' }}
+                                                {{ 'Sudah disetujui' }}
                                             @endif
                                         @endif
                                     </td>
