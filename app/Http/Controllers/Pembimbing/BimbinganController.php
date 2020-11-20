@@ -18,6 +18,7 @@ class BimbinganController extends Controller
                 ->whereHas('bimbingan_one', function($sql){
                     $sql->orderBy('id', 'DESC');
                 })
+                ->orderBy('id', 'DESC')
                 ->get();
         $bimbingan = Bimbingan::with('pkl.peserta')->whereHas('pkl', function (Builder $query) {
             return $query->where('pembimbing_id', auth()->user()->authenticable_id);
