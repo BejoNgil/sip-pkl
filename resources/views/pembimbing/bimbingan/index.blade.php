@@ -42,7 +42,7 @@
                                     </td>
                                     <td>
                                         @if (!empty($item->bimbingan_one->is_approve))
-                                        {{ ($item->bimbingan_one->is_approve == '0') ? 'Belum disetujui' : 'Sudah disetujui' }}
+                                        {{ ($item->bimbingan_one->is_approve == true) ? 'Sudah disetujui' : 'Belum disetuji' }}
                                         @endif
                                     </td>
                                     <td width="15%">
