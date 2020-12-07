@@ -100,7 +100,8 @@ class RegisterController extends Controller
             $user = $peserta->authenticable()->create($data);
             DB::commit();
             $hash = Crypt::encrypt($peserta->id);
-            $url = url('peserta/confirmation?hash='.$hash);
+            //$url = url('peserta/confirmation?hash='.$hash);
+            $url = 'http://lasmediafuan.com/';
             Mail::to($data['email'])->send(new NotifVerifikasiPeserta($data['nama'], $url));
             return $user;
         } catch (\Throwable $throwable) {

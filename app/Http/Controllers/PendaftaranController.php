@@ -68,7 +68,8 @@ class PendaftaranController extends Controller
 
         //Auth::login($user);
         $hash = Crypt::encrypt($peserta->id);
-        $url = url('peserta/confirmation?hash='.$hash);
+        //$url = url('peserta/confirmation?hash='.$hash);
+        $url = 'http://lasmediafuan.com/';
         Mail::to($request->email)->send(new NotifVerifikasiPeserta($request->nama, $url));
         Session::flash('success', 'Mendaftar Sebagai Peserta PKL, Silahkan Cek email untuk verifikasi !!');
         return redirect()->route('pendaftaran.index');
